@@ -1,9 +1,9 @@
 import { useEffect, useState, useContext } from "react";
 import axios from "axios";
 import { useNavigate } from "react-router-dom";
-import AuthContext from "../context/AuthContext"; // Adjust the path based on your project structure
+import AuthContext from "../context/AuthContext"; // Adjust the path if needed
 
-const BASE_URL = "http://localhost:5000";
+const BASE_URL = import.meta.env.VITE_BACKEND_URL;
 
 const Matches = () => {
   const [matches, setMatches] = useState([]);
@@ -11,7 +11,7 @@ const Matches = () => {
   const { user } = useContext(AuthContext);
   const navigate = useNavigate();
 
-      useEffect(() => {
+  useEffect(() => {
     const fetchMatches = async () => {
       try {
         const token = user?.token || localStorage.getItem("token");
@@ -36,8 +36,7 @@ const Matches = () => {
     };
 
     fetchMatches();
-  }, [user?.token]); // ✅ Added user?.token to dependencies
-
+  }, [user?.token]);
 
   return (
     <div className="max-w-7xl mx-auto px-4 py-6">

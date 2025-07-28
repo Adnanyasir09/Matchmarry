@@ -4,7 +4,8 @@ import axios from "axios";
 import AuthContext from "../context/AuthContext";
 import { io } from "socket.io-client";
 
-const BASE_URL = "http://localhost:5000";
+// ✅ Use environment variable instead of hardcoded URL
+const BASE_URL = import.meta.env.VITE_BACKEND_URL;
 
 const ChatPage = () => {
   const { receiverId } = useParams();
@@ -40,12 +41,16 @@ const ChatPage = () => {
   useEffect(() => {
     const fetchReceiver = async () => {
       const token = user?.token || localStorage.getItem("token");
-      const res = await axios.get(`${BASE_URL}/api/users/${receiverId}`, {
-        headers: {
-          Authorization: `Bearer ${token}`,
-        },
-      });
-      setReceiver(res.data);
+      try {
+        const res = await axios.get(`${BASE_URL}/api/users/${receiverId}`, {
+          headers: {
+            Authorization: `Bearer ${token}`,
+          },
+        });
+        setReceiver(res.data);
+      } catch (err) {
+        console.error("Error fetching receiver:", err);
+      }
     };
     fetchReceiver();
   }, [receiverId, user?.token]);
@@ -54,12 +59,16 @@ const ChatPage = () => {
   useEffect(() => {
     const fetchMessages = async () => {
       const token = user?.token || localStorage.getItem("token");
-      const res = await axios.get(`${BASE_URL}/api/messages/${receiverId}`, {
-        headers: {
-          Authorization: `Bearer ${token}`,
-        },
-      });
-      setMessages(res.data);
+      try {
+        const res = await axios.get(`${BASE_URL}/api/messages/${receiverId}`, {
+          headers: {
+            Authorization: `Bearer ${token}`,
+          },
+        });
+        setMessages(res.data);
+      } catch (err) {
+        console.error("Error fetching messages:", err);
+      }
     };
     fetchMessages();
   }, [receiverId, user?.token]);
@@ -101,16 +110,15 @@ const ChatPage = () => {
       <div className="border h-96 overflow-y-scroll p-3 space-y-2 mb-4">
         {messages.map((msg, idx) => (
           <div
-  key={idx}
-  className={`max-w-xs px-4 py-2 rounded-lg shadow text-sm break-words ${
-    msg.sender === user._id
-      ? "ml-auto bg-blue-600 text-white"
-      : "mr-auto bg-gray-200 text-gray-800"
-  }`}
->
-  {msg.text}
-</div>
-
+            key={idx}
+            className={`max-w-xs px-4 py-2 rounded-lg shadow text-sm break-words ${
+              msg.sender === user._id
+                ? "ml-auto bg-blue-600 text-white"
+                : "mr-auto bg-gray-200 text-gray-800"
+            }`}
+          >
+            {msg.text}
+          </div>
         ))}
       </div>
 

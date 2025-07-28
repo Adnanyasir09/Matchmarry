@@ -14,8 +14,24 @@ const app = express();
 app.use(cors());
 app.use(express.json());
 
+
+// ✅ Setup CORS for both local and deployed frontends
+const allowedOrigins = [
+  "http://localhost:5173",                  // local dev
+  "https://matchmarry.vercel.app",          // deployed frontend
+];
+
+app.use(cors({
+  origin: allowedOrigins,
+  credentials: true,
+}));
+
+app.use(express.json());
+
 // Connect MongoDB
 connectDB();
+
+
 
 // Routes
 app.use("/api/auth", authRoutes);
@@ -28,10 +44,12 @@ const server = http.createServer(app);
 
 // Socket.io setup
 
+// ✅ Updated Socket.io CORS config
 const io = new Server(server, {
   cors: {
-    origin: "http://localhost:5173",  // your frontend URL
-    methods: ["GET", "POST"]
+    origin: allowedOrigins,
+    methods: ["GET", "POST"],
+    credentials: true,
   }
 });
 

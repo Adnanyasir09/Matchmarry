@@ -2,7 +2,7 @@ import { useState, useEffect } from "react";
 import axios from "axios";
 import { useNavigate } from "react-router-dom";
 
-const BASE_URL = "http://localhost:5000"; // Your backend is running here
+const BASE_URL = import.meta.env.VITE_BACKEND_URL;
 
 const Profile = () => {
   const [formData, setFormData] = useState({
@@ -69,7 +69,6 @@ const Profile = () => {
       {message && <p className="text-center mb-4 text-blue-600">{message}</p>}
 
       <form onSubmit={handleSubmit} className="space-y-4">
-        {/* Age */}
         <input
           type="number"
           name="age"
@@ -79,17 +78,15 @@ const Profile = () => {
           className="w-full p-2 border rounded"
         />
 
-        {/* Date of Birth */}
         <input
-  type="date"
-  name="dob"
-  value={formData.dob ? formData.dob.split("T")[0] : ""}
-  onChange={handleChange}
-  className="w-full p-2 border rounded"
-  placeholder="Date of Birth"
-/>
+          type="date"
+          name="dob"
+          value={formData.dob ? formData.dob.split("T")[0] : ""}
+          onChange={handleChange}
+          className="w-full p-2 border rounded"
+          placeholder="Date of Birth"
+        />
 
-        {/* Gender */}
         <select
           name="gender"
           value={formData.gender}
@@ -102,7 +99,6 @@ const Profile = () => {
           <option value="Other">Other</option>
         </select>
 
-        {/* Religion */}
         <select
           name="religion"
           value={formData.religion}
@@ -117,7 +113,6 @@ const Profile = () => {
           <option value="Other">Other</option>
         </select>
 
-        {/* Profession */}
         <input
           type="text"
           name="profession"
@@ -127,7 +122,6 @@ const Profile = () => {
           className="w-full p-2 border rounded"
         />
 
-        {/* Height */}
         <input
           type="number"
           name="height"
@@ -137,7 +131,6 @@ const Profile = () => {
           className="w-full p-2 border rounded"
         />
 
-        {/* Salary */}
         <input
           type="number"
           name="salary"
@@ -147,7 +140,6 @@ const Profile = () => {
           className="w-full p-2 border rounded"
         />
 
-        {/* Submit */}
         <button
           type="submit"
           className="w-full bg-blue-600 text-white p-2 rounded hover:bg-blue-700"

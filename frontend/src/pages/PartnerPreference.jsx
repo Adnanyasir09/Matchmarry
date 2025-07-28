@@ -1,9 +1,8 @@
-
 import { useNavigate } from "react-router-dom";
 import axios from "axios";
 import { useState, useEffect } from "react";
 
-const BASE_URL = "http://localhost:5000";
+const BASE_URL = import.meta.env.VITE_BACKEND_URL;
 
 const PartnerPreference = () => {
   const navigate = useNavigate();
@@ -18,80 +17,76 @@ const PartnerPreference = () => {
   });
 
   useEffect(() => {
-  const fetchPreferences = async () => {
-    try {
-      const res = await axios.get(`${BASE_URL}/api/users/me`, {
-        headers: {
-          Authorization: `Bearer ${localStorage.getItem("token")}`,
-        },
-      });
-
-      const user = res.data;
-
-      if (user.partnerPreferences) {
-        setPreferences({
-          religion: user.partnerPreferences.religion || "",
-          education: user.partnerPreferences.education || "",
-          maritalStatus: user.partnerPreferences.maritalStatus || "",
-          ageFrom: user.partnerPreferences.ageRange?.min?.toString() || "",
-          ageTo: user.partnerPreferences.ageRange?.max?.toString() || "",
-          foodChoice: user.partnerPreferences.diet || "",
+    const fetchPreferences = async () => {
+      try {
+        const res = await axios.get(`${BASE_URL}/api/users/me`, {
+          headers: {
+            Authorization: `Bearer ${localStorage.getItem("token")}`,
+          },
         });
-      }
-    } catch (err) {
-      console.error("Failed to fetch preferences:", err.response?.data || err.message);
-    }
-  };
 
-  fetchPreferences();
-}, []);
+        const user = res.data;
+
+        if (user.partnerPreferences) {
+          setPreferences({
+            religion: user.partnerPreferences.religion || "",
+            education: user.partnerPreferences.education || "",
+            maritalStatus: user.partnerPreferences.maritalStatus || "",
+            ageFrom: user.partnerPreferences.ageRange?.min?.toString() || "",
+            ageTo: user.partnerPreferences.ageRange?.max?.toString() || "",
+            foodChoice: user.partnerPreferences.diet || "",
+          });
+        }
+      } catch (err) {
+        console.error("Failed to fetch preferences:", err.response?.data || err.message);
+      }
+    };
+
+    fetchPreferences();
+  }, []);
 
   const handleChange = (e) => {
     setPreferences({ ...preferences, [e.target.name]: e.target.value });
   };
 
   const handleSubmit = async (e) => {
-  e.preventDefault();
-  console.log("Preferences submitted:", preferences);
+    e.preventDefault();
 
-  const token = localStorage.getItem("token");
-  if (!token) {
-    alert("You must be logged in to submit preferences.");
-    return;
-  }
+    const token = localStorage.getItem("token");
+    if (!token) {
+      alert("You must be logged in to submit preferences.");
+      return;
+    }
 
-  const updateData = {
-    partnerPreferences: {
-      religion: preferences.religion,
-      education: preferences.education,
-      maritalStatus: preferences.maritalStatus,
-      diet: preferences.foodChoice.toLowerCase(),
-      ageRange: {
-        min: Number(preferences.ageFrom),
-        max: Number(preferences.ageTo),
+    const updateData = {
+      partnerPreferences: {
+        religion: preferences.religion,
+        education: preferences.education,
+        maritalStatus: preferences.maritalStatus,
+        diet: preferences.foodChoice.toLowerCase(),
+        ageRange: {
+          min: Number(preferences.ageFrom),
+          max: Number(preferences.ageTo),
+        },
       },
-    },
+    };
+
+    try {
+      const res = await axios.put(`${BASE_URL}/api/users/me`, updateData, {
+        headers: {
+          "Content-Type": "application/json",
+          Authorization: `Bearer ${token}`,
+        },
+      });
+
+      console.log("Preferences saved:", res.data);
+      alert("Preferences saved successfully!");
+      navigate("/matches");
+    } catch (err) {
+      console.error("Failed to save preferences:", err.response?.data || err.message);
+      alert("Failed to save partner preferences.");
+    }
   };
-
-  try {
-    const res = await axios.put(`${BASE_URL}/api/users/me`, updateData, {
-      headers: {
-        "Content-Type": "application/json",
-        Authorization: `Bearer ${token}`,
-      },
-    });
-
-    console.log("Preferences saved:", res.data);
-    alert("Preferences saved successfully!");
-
-    // 🔁 Redirect to matches page instead of dashboard
-    navigate("/matches");
-  } catch (err) {
-    console.error("Failed to save preferences:", err.response?.data || err.message);
-    alert("Failed to save partner preferences.");
-  }
-};
-
 
   return (
     <div className="max-w-xl mx-auto mt-10 p-6 bg-white shadow rounded">
@@ -129,9 +124,9 @@ const PartnerPreference = () => {
             className="w-full p-2 border rounded"
           >
             <option value="">Select</option>
-<option value="single">Single</option>
-<option value="divorced">Divorced</option>
-<option value="widow">Widow</option>
+            <option value="single">Single</option>
+            <option value="divorced">Divorced</option>
+            <option value="widow">Widow</option>
           </select>
         </div>
 
@@ -174,8 +169,8 @@ const PartnerPreference = () => {
             required
           >
             <option value="">Select</option>
-<option value="veg">Vegetarian</option>
-<option value="non veg">Non-Vegetarian</option>
+            <option value="veg">Vegetarian</option>
+            <option value="non veg">Non-Vegetarian</option>
           </select>
         </div>
 

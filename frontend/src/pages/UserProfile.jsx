@@ -3,7 +3,8 @@ import { useEffect, useState, useContext } from "react";
 import axios from "axios";
 import AuthContext from "../context/AuthContext";
 
-const BASE_URL = "http://localhost:5000";
+// ✅ Dynamic BASE_URL from .env file
+const BASE_URL = import.meta.env.VITE_BACKEND_URL;
 
 const UserProfile = () => {
   const { userId } = useParams();

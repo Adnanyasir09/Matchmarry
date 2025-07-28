@@ -1,13 +1,12 @@
-
 import { useNavigate } from "react-router-dom";
 import axios from "axios";
-import { useState, useEffect } from "react"; // ✅ Correct
+import { useState, useEffect } from "react";
 
-
-const BASE_URL = "http://localhost:5000"; // Your backend is running here
+// ✅ Dynamically load base URL from .env
+const BASE_URL = import.meta.env.VITE_BACKEND_URL;
 
 const AdditionalDetails = () => {
-   const navigate = useNavigate();
+  const navigate = useNavigate();
   const [form, setForm] = useState({
     maritalStatus: "",
     state: "",
@@ -20,36 +19,36 @@ const AdditionalDetails = () => {
   });
 
   useEffect(() => {
-  const fetchUserDetails = async () => {
-    try {
-      const res = await axios.get(`${BASE_URL}/api/users/me`, {
-        headers: {
-          Authorization: `Bearer ${localStorage.getItem("token")}`,
-        },
-      });
+    const fetchUserDetails = async () => {
+      try {
+        const res = await axios.get(`${BASE_URL}/api/users/me`, {
+          headers: {
+            Authorization: `Bearer ${localStorage.getItem("token")}`,
+          },
+        });
 
-      const data = res.data;
+        const data = res.data;
 
-      setForm((prev) => ({
-        ...prev,
-        maritalStatus: data.maritalStatus || "",
-        state: data.state || "",
-        livingWithFamily: data.livingWithFamily || "",
-        height: data.height || "",
-        weight: data.weight || "",
-        bodyType: data.bodyType || "",
-        familyStatus: data.familyStatus || "",
-        diet: data.diet || "",
-      }));
-    } catch (err) {
-      console.error("Error fetching user details:", err.response?.data || err.message);
-    }
-  };
+        setForm((prev) => ({
+          ...prev,
+          maritalStatus: data.maritalStatus || "",
+          state: data.state || "",
+          livingWithFamily: data.livingWithFamily || "",
+          height: data.height || "",
+          weight: data.weight || "",
+          bodyType: data.bodyType || "",
+          familyStatus: data.familyStatus || "",
+          diet: data.diet || "",
+        }));
+      } catch (err) {
+        console.error("Error fetching user details:", err.response?.data || err.message);
+      }
+    };
 
-  fetchUserDetails();
-}, []);
+    fetchUserDetails();
+  }, []);
 
- const handleChange = (e) => {
+  const handleChange = (e) => {
     setForm({ ...form, [e.target.name]: e.target.value });
   };
 
@@ -66,8 +65,6 @@ const AdditionalDetails = () => {
       });
 
       console.log("Saved successfully:", res.data);
-
-      // Navigate to next page only if save is successful
       navigate("/partner-preference");
     } catch (err) {
       console.error("Error saving additional details:", err.response?.data || err.message);
@@ -93,62 +90,36 @@ const AdditionalDetails = () => {
             className="w-full p-2 border rounded"
           >
             <option value="">Select</option>
-<option value="single">Single</option>
-<option value="divorced">Divorced</option>
-<option value="widow">Widow</option>
-
+            <option value="single">Single</option>
+            <option value="divorced">Divorced</option>
+            <option value="widow">Widow</option>
           </select>
         </div>
 
         <div>
-  <label className="block mb-1 font-semibold">State</label>
-  <select
-    name="state"
-    value={form.state}
-    onChange={handleChange}
-    required
-    className="w-full p-2 border rounded"
-  >
-    <option value="">Select State</option>
-    <option value="Andhra Pradesh">Andhra Pradesh</option>
-    <option value="Arunachal Pradesh">Arunachal Pradesh</option>
-    <option value="Assam">Assam</option>
-    <option value="Bihar">Bihar</option>
-    <option value="Chhattisgarh">Chhattisgarh</option>
-    <option value="Goa">Goa</option>
-    <option value="Gujarat">Gujarat</option>
-    <option value="Haryana">Haryana</option>
-    <option value="Himachal Pradesh">Himachal Pradesh</option>
-    <option value="Jharkhand">Jharkhand</option>
-    <option value="Karnataka">Karnataka</option>
-    <option value="Kerala">Kerala</option>
-    <option value="Madhya Pradesh">Madhya Pradesh</option>
-    <option value="Maharashtra">Maharashtra</option>
-    <option value="Manipur">Manipur</option>
-    <option value="Meghalaya">Meghalaya</option>
-    <option value="Mizoram">Mizoram</option>
-    <option value="Nagaland">Nagaland</option>
-    <option value="Odisha">Odisha</option>
-    <option value="Punjab">Punjab</option>
-    <option value="Rajasthan">Rajasthan</option>
-    <option value="Sikkim">Sikkim</option>
-    <option value="Tamil Nadu">Tamil Nadu</option>
-    <option value="Telangana">Telangana</option>
-    <option value="Tripura">Tripura</option>
-    <option value="Uttar Pradesh">Uttar Pradesh</option>
-    <option value="Uttarakhand">Uttarakhand</option>
-    <option value="West Bengal">West Bengal</option>
-    <option value="Andaman and Nicobar Islands">Andaman and Nicobar Islands</option>
-    <option value="Chandigarh">Chandigarh</option>
-    <option value="Dadra and Nagar Haveli and Daman and Diu">Dadra and Nagar Haveli and Daman and Diu</option>
-    <option value="Delhi">Delhi</option>
-    <option value="Jammu and Kashmir">Jammu and Kashmir</option>
-    <option value="Ladakh">Ladakh</option>
-    <option value="Lakshadweep">Lakshadweep</option>
-    <option value="Puducherry">Puducherry</option>
-  </select>
-</div>
-
+          <label className="block mb-1 font-semibold">State</label>
+          <select
+            name="state"
+            value={form.state}
+            onChange={handleChange}
+            required
+            className="w-full p-2 border rounded"
+          >
+            <option value="">Select State</option>
+            {/* India states dropdown */}
+            {[
+              "Andhra Pradesh", "Arunachal Pradesh", "Assam", "Bihar", "Chhattisgarh", "Goa",
+              "Gujarat", "Haryana", "Himachal Pradesh", "Jharkhand", "Karnataka", "Kerala",
+              "Madhya Pradesh", "Maharashtra", "Manipur", "Meghalaya", "Mizoram", "Nagaland",
+              "Odisha", "Punjab", "Rajasthan", "Sikkim", "Tamil Nadu", "Telangana", "Tripura",
+              "Uttar Pradesh", "Uttarakhand", "West Bengal", "Andaman and Nicobar Islands",
+              "Chandigarh", "Dadra and Nagar Haveli and Daman and Diu", "Delhi",
+              "Jammu and Kashmir", "Ladakh", "Lakshadweep", "Puducherry"
+            ].map((state) => (
+              <option key={state} value={state}>{state}</option>
+            ))}
+          </select>
+        </div>
 
         <div>
           <label className="block mb-1 font-semibold">Living With</label>
@@ -161,7 +132,7 @@ const AdditionalDetails = () => {
           >
             <option value="">Select</option>
             <option value="with family">Family</option>
-<option value="separate">Separate</option>
+            <option value="separate">Separate</option>
           </select>
         </div>
 
@@ -201,9 +172,9 @@ const AdditionalDetails = () => {
             className="w-full p-2 border rounded"
           >
             <option value="">Select</option>
-           <option value="slim">Slim</option>
-<option value="normal">Normal</option>
-<option value="fat">Fat</option>
+            <option value="slim">Slim</option>
+            <option value="normal">Normal</option>
+            <option value="fat">Fat</option>
           </select>
         </div>
 
@@ -218,8 +189,8 @@ const AdditionalDetails = () => {
           >
             <option value="">Select</option>
             <option value="upper middle">Upper Middle</option>
-<option value="middle">Middle</option>
-<option value="below middle">Below Middle</option>
+            <option value="middle">Middle</option>
+            <option value="below middle">Below Middle</option>
           </select>
         </div>
 
@@ -233,8 +204,8 @@ const AdditionalDetails = () => {
             className="w-full p-2 border rounded"
           >
             <option value="">Select</option>
-<option value="veg">Vegetarian</option>
-<option value="non veg">Non-Vegetarian</option>
+            <option value="veg">Vegetarian</option>
+            <option value="non veg">Non-Vegetarian</option>
           </select>
         </div>
 

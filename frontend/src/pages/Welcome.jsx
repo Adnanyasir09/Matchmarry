@@ -2,7 +2,8 @@ import { useEffect, useState } from "react";
 import axios from "axios";
 import { useNavigate } from "react-router-dom";
 
-const BASE_URL = "http://localhost:5000";
+// Dynamic backend URL from environment variable
+const BASE_URL = import.meta.env.VITE_BACKEND_URL ;
 
 const Welcome = () => {
   const [userName, setUserName] = useState("");
@@ -41,7 +42,7 @@ const Welcome = () => {
   }, []);
 
   const handleContinue = () => {
-    navigate("/details"); // Navigate to the next form page
+    navigate("/details");
   };
 
   return (
