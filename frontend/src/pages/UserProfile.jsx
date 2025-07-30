@@ -34,8 +34,10 @@ const UserProfile = () => {
     fetchProfile();
   }, [userId, user?.token]);
 
-  if (loading) return <div className="text-center mt-10">Loading profile...</div>;
-  if (!profile) return <div className="text-center mt-10">Profile not found.</div>;
+  if (loading)
+    return <div className="text-center mt-10">Loading profile...</div>;
+  if (!profile)
+    return <div className="text-center mt-10">Profile not found.</div>;
 
   return (
     <div className="max-w-3xl mx-auto p-6 bg-white rounded shadow mt-6">

@@ -3,7 +3,7 @@ import axios from "axios";
 import { useNavigate } from "react-router-dom";
 
 // Dynamic backend URL from environment variable
-const BASE_URL = import.meta.env.VITE_BACKEND_URL ;
+const BASE_URL = import.meta.env.VITE_BACKEND_URL;
 
 const Welcome = () => {
   const [userName, setUserName] = useState("");
@@ -52,8 +52,12 @@ const Welcome = () => {
           <div className="mx-auto w-20 h-20 rounded-full bg-gradient-to-br from-blue-600 to-indigo-600 flex items-center justify-center text-white text-3xl font-extrabold shadow-lg">
             {userName ? userName.charAt(0).toUpperCase() : "U"}
           </div>
-          <h1 className="text-4xl font-bold mt-4 mb-2">{greeting}, {userName} 👋</h1>
-          <p className="text-lg font-medium text-gray-600">Let’s help you find your perfect match!</p>
+          <h1 className="text-4xl font-bold mt-4 mb-2">
+            {greeting}, {userName} 👋
+          </h1>
+          <p className="text-lg font-medium text-gray-600">
+            Let’s help you find your perfect match!
+          </p>
         </div>
         <button
           onClick={handleContinue}

@@ -33,7 +33,9 @@ const Register = () => {
 
   return (
     <div className="max-w-md mx-auto p-6 mt-10 bg-white shadow-lg rounded">
-      <h2 className="text-2xl font-bold mb-6 text-center text-green-600">Register</h2>
+      <h2 className="text-2xl font-bold mb-6 text-center text-green-600">
+        Register
+      </h2>
       <form onSubmit={handleSubmit} className="space-y-4">
         <input
           type="text"
@@ -72,7 +74,10 @@ const Register = () => {
       </form>
       <p className="mt-4 text-center text-sm text-gray-700">
         Already registered?{" "}
-        <Link to="/login" className="text-green-600 hover:underline font-medium">
+        <Link
+          to="/login"
+          className="text-green-600 hover:underline font-medium"
+        >
           Login here
         </Link>
       </p>

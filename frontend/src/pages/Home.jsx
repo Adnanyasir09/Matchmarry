@@ -12,7 +12,10 @@ const Home = () => {
           Find Love That Lasts ❤️
         </h1>
         <p className="text-lg text-gray-700 mb-8">
-          Welcome to <span className="font-semibold text-pink-600">MatchMarry</span> — your trusted platform to discover meaningful relationships and lifelong partners.
+          Welcome to{" "}
+          <span className="font-semibold text-pink-600">MatchMarry</span> — your
+          trusted platform to discover meaningful relationships and lifelong
+          partners.
         </p>
         <Link
           to="/register"

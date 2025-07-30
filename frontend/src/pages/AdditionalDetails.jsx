@@ -41,7 +41,10 @@ const AdditionalDetails = () => {
           diet: data.diet || "",
         }));
       } catch (err) {
-        console.error("Error fetching user details:", err.response?.data || err.message);
+        console.error(
+          "Error fetching user details:",
+          err.response?.data || err.message,
+        );
       }
     };
 
@@ -67,7 +70,10 @@ const AdditionalDetails = () => {
       console.log("Saved successfully:", res.data);
       navigate("/partner-preference");
     } catch (err) {
-      console.error("Error saving additional details:", err.response?.data || err.message);
+      console.error(
+        "Error saving additional details:",
+        err.response?.data || err.message,
+      );
       alert("Failed to save details.");
     }
   };
@@ -78,7 +84,9 @@ const AdditionalDetails = () => {
         onSubmit={handleSubmit}
         className="bg-white p-8 rounded-3xl shadow-2xl max-w-xl w-full space-y-6"
       >
-        <h2 className="text-3xl font-bold text-center text-gray-800">Your Personal Details</h2>
+        <h2 className="text-3xl font-bold text-center text-gray-800">
+          Your Personal Details
+        </h2>
 
         <div>
           <label className="block mb-1 font-semibold">Marital Status</label>
@@ -108,15 +116,46 @@ const AdditionalDetails = () => {
             <option value="">Select State</option>
             {/* India states dropdown */}
             {[
-              "Andhra Pradesh", "Arunachal Pradesh", "Assam", "Bihar", "Chhattisgarh", "Goa",
-              "Gujarat", "Haryana", "Himachal Pradesh", "Jharkhand", "Karnataka", "Kerala",
-              "Madhya Pradesh", "Maharashtra", "Manipur", "Meghalaya", "Mizoram", "Nagaland",
-              "Odisha", "Punjab", "Rajasthan", "Sikkim", "Tamil Nadu", "Telangana", "Tripura",
-              "Uttar Pradesh", "Uttarakhand", "West Bengal", "Andaman and Nicobar Islands",
-              "Chandigarh", "Dadra and Nagar Haveli and Daman and Diu", "Delhi",
-              "Jammu and Kashmir", "Ladakh", "Lakshadweep", "Puducherry"
+              "Andhra Pradesh",
+              "Arunachal Pradesh",
+              "Assam",
+              "Bihar",
+              "Chhattisgarh",
+              "Goa",
+              "Gujarat",
+              "Haryana",
+              "Himachal Pradesh",
+              "Jharkhand",
+              "Karnataka",
+              "Kerala",
+              "Madhya Pradesh",
+              "Maharashtra",
+              "Manipur",
+              "Meghalaya",
+              "Mizoram",
+              "Nagaland",
+              "Odisha",
+              "Punjab",
+              "Rajasthan",
+              "Sikkim",
+              "Tamil Nadu",
+              "Telangana",
+              "Tripura",
+              "Uttar Pradesh",
+              "Uttarakhand",
+              "West Bengal",
+              "Andaman and Nicobar Islands",
+              "Chandigarh",
+              "Dadra and Nagar Haveli and Daman and Diu",
+              "Delhi",
+              "Jammu and Kashmir",
+              "Ladakh",
+              "Lakshadweep",
+              "Puducherry",
             ].map((state) => (
-              <option key={state} value={state}>{state}</option>
+              <option key={state} value={state}>
+                {state}
+              </option>
             ))}
           </select>
         </div>

@@ -45,7 +45,7 @@ const Profile = () => {
     try {
       const res = await axios.put(`${BASE_URL}/api/users/me`, formData, {
         headers: {
-          'Content-Type': 'application/json',
+          "Content-Type": "application/json",
           Authorization: `Bearer ${localStorage.getItem("token")}`,
         },
       });
@@ -57,14 +57,19 @@ const Profile = () => {
         navigate("/welcome");
       }, 300);
     } catch (err) {
-      console.error("Error updating profile:", err.response?.data || err.message);
+      console.error(
+        "Error updating profile:",
+        err.response?.data || err.message,
+      );
       setMessage("Failed to update profile.");
     }
   };
 
   return (
     <div className="max-w-lg mx-auto mt-10 p-6 bg-white shadow-lg rounded-lg">
-      <h2 className="text-2xl font-bold mb-4 text-center">Update Your Profile</h2>
+      <h2 className="text-2xl font-bold mb-4 text-center">
+        Update Your Profile
+      </h2>
 
       {message && <p className="text-center mb-4 text-blue-600">{message}</p>}
 

@@ -38,7 +38,10 @@ const PartnerPreference = () => {
           });
         }
       } catch (err) {
-        console.error("Failed to fetch preferences:", err.response?.data || err.message);
+        console.error(
+          "Failed to fetch preferences:",
+          err.response?.data || err.message,
+        );
       }
     };
 
@@ -83,7 +86,10 @@ const PartnerPreference = () => {
       alert("Preferences saved successfully!");
       navigate("/matches");
     } catch (err) {
-      console.error("Failed to save preferences:", err.response?.data || err.message);
+      console.error(
+        "Failed to save preferences:",
+        err.response?.data || err.message,
+      );
       alert("Failed to save partner preferences.");
     }
   };
@@ -105,7 +111,9 @@ const PartnerPreference = () => {
         </div>
 
         <div>
-          <label className="block mb-1 font-semibold">Preferred Education</label>
+          <label className="block mb-1 font-semibold">
+            Preferred Education
+          </label>
           <input
             type="text"
             name="education"
