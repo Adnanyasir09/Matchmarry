@@ -61,15 +61,11 @@ const Login = () => {
   };
 
   return (
-    <div
-      className="min-h-screen flex items-center justify-center bg-cover bg-center"
-      style={{ backgroundImage: "url('/matrimony-bg.jpg')" }}
-    >
+    <div className="min-h-screen flex items-center justify-center bg-cover bg-center">
       <div className="bg-white bg-opacity-90 backdrop-blur p-8 rounded-xl shadow-lg w-full max-w-md">
-        <div className="flex justify-center mb-6">
-          <img src="/logo.png" alt="Matrimony Logo" className="h-14" />
-        </div>
-        <h2 className="text-3xl font-bold text-center text-pink-600">Welcome Back</h2>
+        <h2 className="text-3xl font-bold text-center text-pink-600">
+          Welcome Back
+        </h2>
         <p className="text-center text-gray-700 mb-6">
           Join us in finding your life partner ❤️
         </p>
@@ -92,7 +88,9 @@ const Login = () => {
             className="w-full border border-gray-300 p-3 rounded focus:outline-none focus:ring-2 focus:ring-pink-400"
             required
           />
-          {error && <p className="text-red-500 text-sm text-center">{error}</p>}
+          {error && (
+            <p className="text-red-500 text-sm text-center">{error}</p>
+          )}
           <button
             type="submit"
             className="w-full bg-pink-600 hover:bg-pink-700 text-white font-semibold py-3 rounded transition"
@@ -102,7 +100,10 @@ const Login = () => {
         </form>
         <p className="text-center text-sm text-gray-600 mt-4">
           Don’t have an account?{" "}
-          <a href="/register" className="text-pink-600 font-medium hover:underline">
+          <a
+            href="/register"
+            className="text-pink-600 font-medium hover:underline"
+          >
             Register
           </a>
         </p>

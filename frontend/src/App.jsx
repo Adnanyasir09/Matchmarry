@@ -4,7 +4,7 @@ import Register from "./pages/Register";
 import Login from "./pages/Login";
 import Profile from "./pages/Profile";
 import Navbar from "./components/Navbar";
-import Welcome from "./pages/Welcome"; 
+import Welcome from "./pages/Welcome";
 import AdditionalDetails from "./pages/AdditionalDetails";
 import PartnerPreference from "./pages/PartnerPreference";
 import Matches from "./pages/Matches"; // ✅ Import Matches page
