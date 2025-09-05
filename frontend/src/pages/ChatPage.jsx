@@ -96,57 +96,93 @@ const ChatPage = () => {
 
   if (loading) {
     return (
-      <div className="text-center py-10 text-gray-500 font-medium">
-        Loading chat...
+      <div className="min-h-screen flex items-center justify-center bg-gradient-to-br from-indigo-50 via-white to-pink-50">
+        <p className="text-xl text-gray-700 animate-pulse">Loading chat...</p>
       </div>
     );
   }
 
   if (error) {
     return (
-      <div className="text-center py-10 text-red-600 font-medium">
-        {error}
+      <div className="min-h-screen flex items-center justify-center bg-gradient-to-br from-red-50 via-white to-red-100">
+        <p className="text-xl text-red-600">{error}</p>
       </div>
     );
   }
 
   return (
-    <div className="max-w-3xl mx-auto p-4 bg-white rounded-lg shadow-md mt-6 h-[80vh] flex flex-col">
-      <h2 className="text-2xl font-bold mb-4 text-gray-700 border-b pb-2">
-        Chat with <span className="text-blue-600">{receiver?.name}</span>
-      </h2>
+    <div className="min-h-screen flex items-center justify-center bg-black px-4 py-10 pt-20">
+      <div className="w-full max-w-xl flex flex-col bg-white/80 backdrop-blur-lg rounded-3xl shadow-2xl h-[80vh] overflow-hidden">
+        
+        {/* Chat Header */}
+<div className="flex items-center justify-between px-6 py-4 bg-gray-900
+ 
+  text-white shadow-lg border-b border-white/20">
+  
+  {/* Left Section: Profile + Info */}
+<div className="flex items-center gap-4">
+  {/* Profile Image */}
+  <img
+    src={receiver?.profilePicture || "/default-profile.png"}
+    alt={receiver?.name}
+    className="w-14 h-14 rounded-full border-2 border-white/80 shadow-md"
+  />
 
-      <div className="flex-1 overflow-y-auto space-y-2 px-2">
-        {messages.map((msg, idx) => (
-          <div
-            key={idx}
-            className={`max-w-xs px-4 py-2 rounded-xl text-sm shadow transition-all duration-300 ${
-              msg.sender === user._id
-                ? "ml-auto bg-blue-600 text-white"
-                : "mr-auto bg-gray-200 text-gray-800"
-            }`}
+  {/* User Info */}
+  <div className="flex flex-col">
+    {/* Name */}
+    <h2 className="text-xl font-bold tracking-wide text-white drop-shadow-md">
+      {receiver?.name}
+    </h2>
+
+    
+  </div>
+</div>
+
+
+  
+</div>
+
+
+        {/* Messages */}
+        <div className="flex-1 overflow-y-auto px-6 py-4 space-y-3 bg-gradient-to-b from-gray-500 to-gray-100">
+          {messages.map((msg, idx) => (
+  <div
+    key={idx}
+    className={`flex ${msg.sender === user._id ? "justify-end" : "justify-start"}`}
+  >
+    <div
+      className={`inline-flex px-4 py-2 rounded-2xl shadow-sm transition-all break-words w-fit max-w-xs ${
+        msg.sender === user._id
+          ? "bg-gradient-to-r from-emerald-500 to-emerald-400 text-white rounded-br-none"
+          : "bg-white border border-gray-200 text-gray-800 rounded-bl-none"
+      }`}
+    >
+      {msg.text}
+    </div>
+  </div>
+))}
+
+          <div ref={bottomRef} />
+        </div>
+
+        {/* Input Box */}
+        <div className="p-4 border-t bg-gradient-to-r from-gray-500 to-gray-400 flex items-center gap-3">
+          <input
+            type="text"
+            value={text}
+            onChange={(e) => setText(e.target.value)}
+            onKeyDown={(e) => e.key === "Enter" && sendMessage()}
+            placeholder="Type a message..."
+            className="flex-1 px-4 py-3 rounded-full border border-gray-300 focus:outline-none focus:ring-2 focus:ring-indigo-400"
+          />
+          <button
+            onClick={sendMessage}
+            className="px-6 py-3 rounded-full bg-gradient-to-r from-indigo-500 to-pink-500 text-white font-semibold shadow-md hover:opacity-90 transition"
           >
-            {msg.text}
-          </div>
-        ))}
-        <div ref={bottomRef} />
-      </div>
-
-      <div className="mt-4 flex gap-2">
-        <input
-          type="text"
-          value={text}
-          onChange={(e) => setText(e.target.value)}
-          onKeyDown={(e) => e.key === "Enter" && sendMessage()}
-          placeholder="Type your message..."
-          className="flex-1 border border-gray-300 px-4 py-2 rounded focus:outline-none focus:ring-2 focus:ring-blue-500"
-        />
-        <button
-          onClick={sendMessage}
-          className="bg-blue-600 text-white px-5 rounded hover:bg-blue-700 transition duration-200"
-        >
-          Send
-        </button>
+            Send
+          </button>
+        </div>
       </div>
     </div>
   );

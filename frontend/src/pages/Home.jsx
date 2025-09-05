@@ -3,7 +3,8 @@ import { HeartIcon } from "@heroicons/react/24/solid";
 
 const Home = () => {
   return (
-    <div className="min-h-screen bg-gradient-to-r from-pink-100 via-rose-200 to-pink-100 flex flex-col items-center justify-center text-center px-4">
+    <div className="min-h-screen bg-gradient-to-br from-cyan-300 via-white to-green-300
+ flex flex-col items-center justify-center text-center px-4">
       <div className="max-w-2xl">
         <div className="flex justify-center mb-4">
           <HeartIcon className="h-12 w-12 text-pink-600 animate-bounce" />

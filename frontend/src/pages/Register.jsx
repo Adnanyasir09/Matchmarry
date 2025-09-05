@@ -32,55 +32,76 @@ const Register = () => {
   };
 
   return (
-    <div className="max-w-md mx-auto p-6 mt-10 bg-white shadow-lg rounded">
-      <h2 className="text-2xl font-bold mb-6 text-center text-green-600">
-        Register
-      </h2>
-      <form onSubmit={handleSubmit} className="space-y-4">
-        <input
-          type="text"
-          name="name"
-          placeholder="Full Name"
-          value={form.name}
-          onChange={handleChange}
-          className="w-full border p-2 rounded"
-          required
-        />
-        <input
-          type="email"
-          name="email"
-          placeholder="Email"
-          value={form.email}
-          onChange={handleChange}
-          className="w-full border p-2 rounded"
-          required
-        />
-        <input
-          type="password"
-          name="password"
-          placeholder="Password"
-          value={form.password}
-          onChange={handleChange}
-          className="w-full border p-2 rounded"
-          required
-        />
-        {error && <p className="text-red-500 text-sm">{error}</p>}
-        <button
-          type="submit"
-          className="w-full bg-green-600 text-white py-2 rounded hover:bg-green-700"
-        >
-          Register
-        </button>
-      </form>
-      <p className="mt-4 text-center text-sm text-gray-700">
-        Already registered?{" "}
-        <Link
-          to="/login"
-          className="text-green-600 hover:underline font-medium"
-        >
-          Login here
-        </Link>
-      </p>
+    <div className="min-h-screen flex items-center justify-center bg-gradient-to-br from-pink-400 via-white to-emerald-300 px-4">
+      <div className="w-full max-w-md bg-white rounded-2xl shadow-2xl p-8">
+        {/* Title */}
+        <h2 className="text-3xl font-extrabold mb-6 text-center text-gray-900">
+          Create Your Account
+        </h2>
+
+        {/* Form */}
+        <form onSubmit={handleSubmit} className="space-y-5">
+          <div>
+            <input
+              type="text"
+              name="name"
+              placeholder="Full Name"
+              value={form.name}
+              onChange={handleChange}
+              className="w-full border border-gray-300 p-3 rounded-lg focus:outline-none focus:ring-2 focus:ring-green-500 focus:border-green-500 transition"
+              required
+            />
+          </div>
+          <div>
+            <input
+              type="email"
+              name="email"
+              placeholder="Email Address"
+              value={form.email}
+              onChange={handleChange}
+              className="w-full border border-gray-300 p-3 rounded-lg focus:outline-none focus:ring-2 focus:ring-green-500 focus:border-green-500 transition"
+              required
+            />
+          </div>
+          <div>
+            <input
+              type="password"
+              name="password"
+              placeholder="Password"
+              value={form.password}
+              onChange={handleChange}
+              className="w-full border border-gray-300 p-3 rounded-lg focus:outline-none focus:ring-2 focus:ring-green-500 focus:border-green-500 transition"
+              required
+            />
+          </div>
+
+          {/* Error Message */}
+          {error && (
+            <p className="text-red-500 text-sm text-center font-medium">
+              {error}
+            </p>
+          )}
+
+          {/* Submit Button */}
+          <button
+            type="submit"
+            className="w-full bg-gradient-to-r from-green-500 to-emerald-600 text-white py-3 rounded-lg font-semibold shadow-md hover:from-green-600 hover:to-emerald-700 hover:shadow-lg transition-all"
+          >
+            Register
+          </button>
+        </form>
+
+        {/* Footer */}
+        <p className="mt-6 text-center text-sm text-gray-600">
+          Already have an account?{" "}
+          <Link
+            to="/login"
+            className="text-green-600 hover:text-green-700 font-semibold transition"
+          >
+            Login here
+          </Link>
+        </p>
+      </div>
     </div>
   );
 };

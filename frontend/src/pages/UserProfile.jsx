@@ -3,7 +3,7 @@ import { useEffect, useState, useContext } from "react";
 import axios from "axios";
 import AuthContext from "../context/AuthContext";
 
-// ✅ Dynamic BASE_URL from .env file
+// ✅ Dynamic BASE_URL from .env
 const BASE_URL = import.meta.env.VITE_BACKEND_URL;
 
 const UserProfile = () => {
@@ -35,34 +35,85 @@ const UserProfile = () => {
   }, [userId, user?.token]);
 
   if (loading)
-    return <div className="text-center mt-10">Loading profile...</div>;
+    return (
+      <div className="min-h-screen flex items-center justify-center bg-gradient-to-br from-indigo-50 via-white to-pink-50">
+        <p className="text-xl text-gray-700 animate-pulse">
+          Loading profile...
+        </p>
+      </div>
+    );
+
   if (!profile)
-    return <div className="text-center mt-10">Profile not found.</div>;
+    return (
+      <div className="min-h-screen flex items-center justify-center bg-gradient-to-br from-indigo-50 via-white to-pink-50">
+        <p className="text-xl text-gray-700">Profile not found.</p>
+      </div>
+    );
 
   return (
-    <div className="max-w-3xl mx-auto p-6 bg-white rounded shadow mt-6">
-      <div className="flex flex-col items-center">
-        <img
-          src={profile.profilePicture || "/default-profile.png"}
-          alt="Profile"
-          className="w-40 h-40 object-cover rounded-full border mb-4"
-        />
-        <h2 className="text-2xl font-bold mb-2">{profile.name}</h2>
-        <p className="text-gray-600">Age: {profile.age}</p>
-        <p className="text-gray-600">Gender: {profile.gender}</p>
-        <p className="text-gray-600">Profession: {profile.profession}</p>
-        <p className="text-gray-600">State: {profile.state}</p>
-        <p className="text-gray-600">Religion: {profile.religion}</p>
-        <p className="text-gray-600">Height: {profile.height} cm</p>
-        <p className="text-gray-600">Weight: {profile.weight} kg</p>
-        <p className="text-gray-600">Marital Status: {profile.maritalStatus}</p>
+    <div className="min-h-screen bg-gradient-to-br from-indigo-50 via-white to-pink-50 px-6 py-16 pt-24">
+      <div className="max-w-5xl mx-auto bg-white rounded-3xl shadow-lg p-10 lg:flex gap-10 items-center transition-all duration-300 hover:shadow-2xl">
+        
+        {/* Profile Image */}
+        <div className="flex-shrink-0 flex justify-center">
+          <img
+            src={profile.profilePicture || "/default-profile.png"}
+            alt="Profile"
+            className="w-48 h-48 object-cover rounded-full border-4 border-pink-200 shadow-md"
+          />
+        </div>
 
-        <button
-          onClick={() => navigate(`/chat/${profile._id}`)}
-          className="mt-6 bg-green-600 text-white px-6 py-2 rounded hover:bg-green-700"
-        >
-          Message
-        </button>
+        {/* Profile Details */}
+        <div className="mt-8 lg:mt-0 lg:flex-1">
+          <h2 className="text-3xl font-extrabold text-gray-900 mb-4">
+            {profile.name}
+          </h2>
+
+          <div className="grid grid-cols-1 sm:grid-cols-2 gap-y-3 gap-x-6 text-gray-700 text-base">
+            <p>
+              <span className="font-semibold text-gray-900">Age:</span>{" "}
+              {profile.age || "N/A"}
+            </p>
+            <p>
+              <span className="font-semibold text-gray-900">Gender:</span>{" "}
+              {profile.gender || "Not specified"}
+            </p>
+            <p>
+              <span className="font-semibold text-gray-900">Profession:</span>{" "}
+              {profile.profession || "Not specified"}
+            </p>
+            <p>
+              <span className="font-semibold text-gray-900">State:</span>{" "}
+              {profile.state || "Not specified"}
+            </p>
+            <p>
+              <span className="font-semibold text-gray-900">Religion:</span>{" "}
+              {profile.religion || "Not specified"}
+            </p>
+            <p>
+              <span className="font-semibold text-gray-900">Height:</span>{" "}
+              {profile.height ? `${profile.height} cm` : "Not specified"}
+            </p>
+            <p>
+              <span className="font-semibold text-gray-900">Weight:</span>{" "}
+              {profile.weight ? `${profile.weight} kg` : "Not specified"}
+            </p>
+            <p>
+              <span className="font-semibold text-gray-900">
+                Marital Status:
+              </span>{" "}
+              {profile.maritalStatus || "Not specified"}
+            </p>
+          </div>
+
+          {/* Message Button */}
+          <button
+            onClick={() => navigate(`/chat/${profile._id}`)}
+            className="mt-8 w-full sm:w-auto px-8 py-3 bg-gradient-to-r from-indigo-500 to-pink-500 text-white text-lg font-semibold rounded-xl shadow-md hover:opacity-90 hover:shadow-lg transition-all"
+          >
+            💬 Message
+          </button>
+        </div>
       </div>
     </div>
   );

@@ -38,66 +38,70 @@ const Matches = () => {
     fetchMatches();
   }, [user?.token]);
 
+  // Skeleton loader for better UX
   const renderSkeleton = () =>
     Array.from({ length: 6 }).map((_, idx) => (
       <div
         key={idx}
-        className="animate-pulse border rounded-lg p-4 bg-blue"
+        className="animate-pulse border rounded-2xl p-5 bg-white shadow-sm"
       >
-        <div className="w-full h-48 bg-gray-300 rounded mb-4"></div>
-        <div className="h-4 bg-gray-300 rounded w-3/4 mb-2"></div>
-        <div className="h-3 bg-gray-200 rounded w-1/2 mb-1"></div>
-        <div className="h-3 bg-gray-200 rounded w-2/3 mb-3"></div>
-        <div className="h-10 bg-gray-300 rounded"></div>
+        <div className="w-full h-48 bg-gray-200 rounded-xl mb-5"></div>
+        <div className="h-5 bg-gray-200 rounded w-3/4 mb-3"></div>
+        <div className="h-4 bg-gray-200 rounded w-1/2 mb-2"></div>
+        <div className="h-4 bg-gray-200 rounded w-2/3 mb-4"></div>
+        <div className="h-11 bg-gray-300 rounded-xl"></div>
       </div>
     ));
 
   return (
-    <div className="max-w-7xl mx-auto px-4 py-10">
-      <h2 className="text-4xl font-bold text-center text-red-400 mb-10">
-        Discover Matching Profiles
+    <div className="min-h-screen bg-gradient-to-br from-indigo-50 via-white to-pink-50 px-6 py-16 pt-24">
+      <h2 className="text-5xl font-extrabold text-center text-gray-800 mb-14 tracking-tight">
+        ✨ Discover Matching Profiles
       </h2>
 
       {loading ? (
-        <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-8">
+        <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-10">
           {renderSkeleton()}
         </div>
       ) : matches.length === 0 ? (
-        <p className="text-center text-gray-600 text-lg">
+        <p className="text-center text-gray-600 text-xl">
           No matches found based on your preferences.
         </p>
       ) : (
-        <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-8">
+        <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-10">
           {matches.map((match) => (
             <div
               key={match._id}
-              className="bg-white border rounded-xl p-5 shadow-md hover:shadow-xl transition duration-300"
+              className="bg-white border rounded-2xl p-6 shadow-md hover:shadow-2xl transition-all duration-300 transform hover:-translate-y-2"
             >
               <img
                 src={match.profilePicture || "/default-profile.png"}
                 alt={`${match.name}'s profile`}
-                className="w-full h-48 object-cover rounded-md mb-4"
+                className="w-full h-56 object-cover rounded-xl mb-5"
               />
 
-              <h3 className="text-2xl font-semibold text-gray-800 mb-1">
+              <h3 className="text-2xl font-bold text-gray-900 mb-2">
                 {match.name}
               </h3>
 
-              <div className="text-gray-600 space-y-1 text-sm">
+              <div className="text-gray-600 space-y-2 text-base">
                 <p>
-                  <strong>Age:</strong> {match.age || "N/A"}
+                  <span className="font-semibold text-gray-800">Age:</span>{" "}
+                  {match.age || "N/A"}
                 </p>
                 <p>
-                  <strong>Profession:</strong> {match.profession || "Not specified"}
+                  <span className="font-semibold text-gray-800">Profession:</span>{" "}
+                  {match.profession || "Not specified"}
                 </p>
                 <p>
-                  <strong>Location:</strong> {match.state || "Not specified"}
+                  <span className="font-semibold text-gray-800">Location:</span>{" "}
+                  {match.state || "Not specified"}
                 </p>
               </div>
 
               <button
                 onClick={() => navigate(`/profile/${match._id}`)}
-                className="mt-5 w-full bg-blue-600 text-white py-2 rounded-lg font-medium hover:bg-blue-700 transition"
+                className="mt-6 w-full bg-gradient-to-r from-indigo-500 to-pink-500 text-white py-3 rounded-xl font-semibold text-lg shadow-md hover:opacity-90 hover:shadow-lg transition-all"
               >
                 View Profile
               </button>
