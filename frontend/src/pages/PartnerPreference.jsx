@@ -95,101 +95,109 @@ const PartnerPreference = () => {
   };
 
   return (
-    <div className="max-w-xl mx-auto mt-10 p-6 bg-white shadow rounded">
-      <h2 className="text-2xl font-bold mb-4">Partner Preferences</h2>
-      <form onSubmit={handleSubmit} className="space-y-4">
-        <div>
-          <label className="block mb-1 font-semibold">Preferred Religion</label>
-          <input
-            type="text"
-            name="religion"
-            value={preferences.religion}
-            onChange={handleChange}
-            className="w-full p-2 border rounded"
-            required
-          />
-        </div>
+    <div className="min-h-screen flex items-center justify-center bg-gradient-to-tr from-blue-100 via-purple-50 to-pink-100 px-4 py-12 mt-14">
+  <div className="w-full max-w-xl bg-white rounded-3xl shadow-2xl p-8 md:p-12 space-y-6 relative overflow-hidden">
+    
+    
 
-        <div>
-          <label className="block mb-1 font-semibold">
-            Preferred Education
-          </label>
-          <input
-            type="text"
-            name="education"
-            value={preferences.education}
-            onChange={handleChange}
-            className="w-full p-2 border rounded"
-          />
-        </div>
+    <h2 className="text-3xl font-extrabold text-gray-800 text-center mb-6">Partner Preferences</h2>
 
-        <div>
-          <label className="block mb-1 font-semibold">Marital Status</label>
-          <select
-            name="maritalStatus"
-            value={preferences.maritalStatus}
-            onChange={handleChange}
-            className="w-full p-2 border rounded"
-          >
-            <option value="">Select</option>
-            <option value="single">Single</option>
-            <option value="divorced">Divorced</option>
-            <option value="widow">Widow</option>
-          </select>
-        </div>
+    <form onSubmit={handleSubmit} className="space-y-5 relative z-10">
+      
+      <div>
+        <label className="block mb-2 font-semibold text-gray-700">Preferred Religion</label>
+        <input
+          type="text"
+          name="religion"
+          value={preferences.religion}
+          onChange={handleChange}
+          className="w-full p-3 border border-gray-300 rounded-xl focus:outline-none focus:ring-2 focus:ring-blue-400 transition"
+          required
+        />
+      </div>
 
-        <div className="flex gap-4">
-          <div className="flex-1">
-            <label className="block mb-1 font-semibold">Age From</label>
-            <input
-              type="number"
-              name="ageFrom"
-              value={preferences.ageFrom}
-              onChange={handleChange}
-              min="18"
-              max="60"
-              className="w-full p-2 border rounded"
-              required
-            />
-          </div>
-          <div className="flex-1">
-            <label className="block mb-1 font-semibold">Age To</label>
-            <input
-              type="number"
-              name="ageTo"
-              value={preferences.ageTo}
-              onChange={handleChange}
-              min="18"
-              max="60"
-              className="w-full p-2 border rounded"
-              required
-            />
-          </div>
-        </div>
+      <div>
+        <label className="block mb-2 font-semibold text-gray-700">Preferred Education</label>
+        <input
+          type="text"
+          name="education"
+          value={preferences.education}
+          onChange={handleChange}
+          className="w-full p-3 border border-gray-300 rounded-xl focus:outline-none focus:ring-2 focus:ring-blue-400 transition"
+        />
+      </div>
 
-        <div>
-          <label className="block mb-1 font-semibold">Food Preference</label>
-          <select
-            name="foodChoice"
-            value={preferences.foodChoice}
-            onChange={handleChange}
-            className="w-full p-2 border rounded"
-            required
-          >
-            <option value="">Select</option>
-            <option value="veg">Vegetarian</option>
-            <option value="non veg">Non-Vegetarian</option>
-          </select>
-        </div>
-
-        <button
-          type="submit"
-          className="w-full bg-blue-600 text-white py-2 rounded hover:bg-blue-700"
+      <div>
+        <label className="block mb-2 font-semibold text-gray-700">Marital Status</label>
+        <select
+          name="maritalStatus"
+          value={preferences.maritalStatus}
+          onChange={handleChange}
+          className="w-full p-3 border border-gray-300 rounded-xl focus:outline-none focus:ring-2 focus:ring-blue-400 transition"
         >
-          Submit Preferences
-        </button>
-      </form>
-    </div>
+          <option value="">Select</option>
+          <option value="single">Single</option>
+          <option value="divorced">Divorced</option>
+          <option value="widow">Widow</option>
+        </select>
+      </div>
+
+      <div className="grid grid-cols-2 gap-4">
+        <div>
+          <label className="block mb-2 font-semibold text-gray-700">Age From</label>
+          <input
+            type="number"
+            name="ageFrom"
+            value={preferences.ageFrom}
+            onChange={handleChange}
+            min="18"
+            max="60"
+            className="w-full p-3 border border-gray-300 rounded-xl focus:outline-none focus:ring-2 focus:ring-blue-400 transition"
+            required
+          />
+        </div>
+        <div>
+          <label className="block mb-2 font-semibold text-gray-700">Age To</label>
+          <input
+            type="number"
+            name="ageTo"
+            value={preferences.ageTo}
+            onChange={handleChange}
+            min="18"
+            max="60"
+            className="w-full p-3 border border-gray-300 rounded-xl focus:outline-none focus:ring-2 focus:ring-blue-400 transition"
+            required
+          />
+        </div>
+      </div>
+
+      <div>
+        <label className="block mb-2 font-semibold text-gray-700">Food Preference</label>
+        <select
+          name="foodChoice"
+          value={preferences.foodChoice}
+          onChange={handleChange}
+          className="w-full p-3 border border-gray-300 rounded-xl focus:outline-none focus:ring-2 focus:ring-blue-400 transition"
+          required
+        >
+          <option value="">Select</option>
+          <option value="veg">Vegetarian</option>
+          <option value="non veg">Non-Vegetarian</option>
+        </select>
+      </div>
+
+      <button
+        type="submit"
+        className="w-full py-3 rounded-xl bg-gradient-to-r from-blue-600 to-purple-600 text-white font-semibold text-lg shadow-lg hover:shadow-xl transition-transform transform hover:scale-105"
+      >
+        Submit Preferences
+      </button>
+    </form>
+
+    
+  </div>
+</div>
+
   );
 };
 

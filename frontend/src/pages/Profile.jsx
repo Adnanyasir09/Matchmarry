@@ -66,93 +66,109 @@ const Profile = () => {
   };
 
   return (
-    <div className="max-w-lg mx-auto mt-10 p-6 bg-white shadow-lg rounded-lg">
-      <h2 className="text-2xl font-bold mb-4 text-center">
-        Update Your Profile
-      </h2>
+    <div className="min-h-screen bg-gradient-to-br from-purple-100 via-pink-100 to-emerald-200 flex items-center justify-center px-4 py-12 pt-28">
+  <div className="max-w-lg w-full bg-white/90 backdrop-blur-md rounded-3xl shadow-2xl p-8">
+    
+    <h2 className="text-3xl font-extrabold mb-6 text-center text-gray-800 tracking-tight">
+      Update Your Profile
+    </h2>
 
-      {message && <p className="text-center mb-4 text-blue-600">{message}</p>}
+    {message && (
+      <p className="text-center mb-4 text-blue-600 font-medium">{message}</p>
+    )}
 
-      <form onSubmit={handleSubmit} className="space-y-4">
-        <input
-          type="number"
-          name="age"
-          placeholder="Age"
-          value={formData.age}
-          onChange={handleChange}
-          className="w-full p-2 border rounded"
-        />
+    <form onSubmit={handleSubmit} className="space-y-5">
 
-        <input
-          type="date"
-          name="dob"
-          value={formData.dob ? formData.dob.split("T")[0] : ""}
-          onChange={handleChange}
-          className="w-full p-2 border rounded"
-          placeholder="Date of Birth"
-        />
+      {/* Age */}
+      <input
+        type="number"
+        name="age"
+        placeholder="Age"
+        value={formData.age}
+        onChange={handleChange}
+        className="w-full p-3 border border-gray-300 rounded-xl focus:outline-none focus:ring-2 focus:ring-purple-400 transition placeholder-gray-400"
+      />
 
-        <select
-          name="gender"
-          value={formData.gender}
-          onChange={handleChange}
-          className="w-full p-2 border rounded"
-        >
-          <option value="">Select Gender</option>
-          <option value="Male">Male</option>
-          <option value="Female">Female</option>
-          <option value="Other">Other</option>
-        </select>
+      {/* Date of Birth */}
+      <input
+        type="date"
+        name="dob"
+        value={formData.dob ? formData.dob.split("T")[0] : ""}
+        onChange={handleChange}
+        className="w-full p-3 border border-gray-300 rounded-xl focus:outline-none focus:ring-2 focus:ring-purple-400 transition placeholder-gray-400"
+        placeholder="Date of Birth"
+      />
 
-        <select
-          name="religion"
-          value={formData.religion}
-          onChange={handleChange}
-          className="w-full p-2 border rounded"
-        >
-          <option value="">Select Religion</option>
-          <option value="Hindu">Hindu</option>
-          <option value="Muslim">Muslim</option>
-          <option value="Christian">Christian</option>
-          <option value="Sikh">Sikh</option>
-          <option value="Other">Other</option>
-        </select>
+      {/* Gender */}
+      <select
+        name="gender"
+        value={formData.gender}
+        onChange={handleChange}
+        className="w-full p-3 border border-gray-300 rounded-xl focus:outline-none focus:ring-2 focus:ring-purple-400 transition"
+      >
+        <option value="">Select Gender</option>
+        <option value="Male">Male</option>
+        <option value="Female">Female</option>
+        <option value="Other">Other</option>
+      </select>
 
-        <input
-          type="text"
-          name="profession"
-          placeholder="Profession"
-          value={formData.profession}
-          onChange={handleChange}
-          className="w-full p-2 border rounded"
-        />
+      {/* Religion */}
+      <select
+        name="religion"
+        value={formData.religion}
+        onChange={handleChange}
+        className="w-full p-3 border border-gray-300 rounded-xl focus:outline-none focus:ring-2 focus:ring-purple-400 transition"
+      >
+        <option value="">Select Religion</option>
+        <option value="Hindu">Hindu</option>
+        <option value="Muslim">Muslim</option>
+        <option value="Christian">Christian</option>
+        <option value="Sikh">Sikh</option>
+        <option value="Other">Other</option>
+      </select>
 
+      {/* Profession */}
+      <input
+        type="text"
+        name="profession"
+        placeholder="Profession"
+        value={formData.profession}
+        onChange={handleChange}
+        className="w-full p-3 border border-gray-300 rounded-xl focus:outline-none focus:ring-2 focus:ring-purple-400 transition placeholder-gray-400"
+      />
+
+      {/* Height & Salary */}
+      <div className="grid grid-cols-1 sm:grid-cols-2 gap-4">
         <input
           type="number"
           name="height"
-          placeholder="Height (in cm)"
+          placeholder="Height (cm)"
           value={formData.height}
           onChange={handleChange}
-          className="w-full p-2 border rounded"
+          className="w-full p-3 border border-gray-300 rounded-xl focus:outline-none focus:ring-2 focus:ring-purple-400 transition placeholder-gray-400"
         />
-
         <input
           type="number"
           name="salary"
-          placeholder="Salary (monthly in ₹)"
+          placeholder="Salary (₹ per month)"
           value={formData.salary}
           onChange={handleChange}
-          className="w-full p-2 border rounded"
+          className="w-full p-3 border border-gray-300 rounded-xl focus:outline-none focus:ring-2 focus:ring-purple-400 transition placeholder-gray-400"
         />
+      </div>
 
-        <button
-          type="submit"
-          className="w-full bg-blue-600 text-white p-2 rounded hover:bg-blue-700"
-        >
-          Save Profile
-        </button>
-      </form>
-    </div>
+      {/* Submit Button */}
+      <button
+        type="submit"
+        className="w-full py-3 rounded-2xl bg-gradient-to-r from-purple-600 to-pink-500 text-white font-semibold text-lg shadow-lg hover:opacity-95 hover:shadow-xl transition"
+      >
+        Save Profile
+      </button>
+
+    </form>
+  </div>
+</div>
+
   );
 };
 
